@@ -3,6 +3,8 @@ package com.nukhbahire.platform.controller;
 import com.nukhbahire.platform.dto.JwtResponseVO;
 import com.nukhbahire.platform.dto.LoginRequestVO;
 import com.nukhbahire.platform.dto.RegistrationRequestVO;
+import com.nukhbahire.platform.dto.UserDetailsVO;
+import com.nukhbahire.platform.model.MyUserDetails;
 import com.nukhbahire.platform.model.User;
 import com.nukhbahire.platform.service.JwtUtil;
 import com.nukhbahire.platform.service.MyUserDetailsService;
@@ -48,7 +50,14 @@ public class AuthRestController {
         final UserDetails userDetails = myUserDetailsService.loadUserByUsername(loginRequestVO.getUsername());
         final String jwt = jwtUtil.generateToken(userDetails);
 
-        return ResponseEntity.ok(new JwtResponseVO(jwt, userDetails));
+        UserDetailsVO userDetailsVO = new UserDetailsVO(
+                ((MyUserDetails) userDetails).getUserId(),
+                userDetails.getUsername(),
+                ((MyUserDetails) userDetails).getEmail(),
+                userDetails.getAuthorities()
+        );
+
+        return ResponseEntity.ok(new JwtResponseVO(jwt, userDetailsVO));
     }
 
 }

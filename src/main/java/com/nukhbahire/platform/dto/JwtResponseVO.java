@@ -8,5 +8,5 @@ import org.springframework.security.core.userdetails.UserDetails;
 @AllArgsConstructor
 public class JwtResponseVO {
     private final String jwt;
-    private final UserDetails userDetails;
+    private final UserDetailsVO userDetails;
 }
