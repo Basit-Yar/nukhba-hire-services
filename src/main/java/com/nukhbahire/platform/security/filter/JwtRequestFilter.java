@@ -1,5 +1,6 @@
 package com.nukhbahire.platform.security.filter;
 
+import com.nukhbahire.platform.model.MyUserDetails;
 import com.nukhbahire.platform.service.JwtUtil;
 import com.nukhbahire.platform.service.MyUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,6 +50,13 @@ public class JwtRequestFilter extends OncePerRequestFilter {
                 usernamePasswordAuthenticationToken
                         .setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
                 SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
+
+                // Set custom attributes for ServiceContext
+                request.setAttribute("userId", ((MyUserDetails) userDetails).getUserId()); // assuming your UserDetails has userId
+                request.setAttribute("username", userDetails.getUsername());
+                request.setAttribute("email", ((MyUserDetails) userDetails).getEmail());    // if available
+                request.setAttribute("roles", userDetails.getAuthorities());
+
             }
         }
         chain.doFilter(request, response);
