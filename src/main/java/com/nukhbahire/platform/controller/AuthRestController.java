@@ -6,6 +6,7 @@ import com.nukhbahire.platform.dto.RegistrationRequestVO;
 import com.nukhbahire.platform.dto.UserDetailsVO;
 import com.nukhbahire.platform.model.MyUserDetails;
 import com.nukhbahire.platform.model.User;
+import com.nukhbahire.platform.service.AuthService;
 import com.nukhbahire.platform.service.JwtUtil;
 import com.nukhbahire.platform.service.MyUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,9 +30,13 @@ public class AuthRestController {
     @Autowired
     MyUserDetailsService myUserDetailsService;
 
+    @Autowired
+    AuthService authService;
+
     @PostMapping("/v1/auth/register")
     public ResponseEntity<User> registerUser(@RequestBody RegistrationRequestVO requestVO) {
-        User savedUser = myUserDetailsService.saveUser(requestVO);
+//        User savedUser = myUserDetailsService.saveUser(requestVO);
+        User savedUser = authService.registerUser(requestVO);
         return ResponseEntity.ok(savedUser);
     }
 
