@@ -34,14 +34,13 @@ public class AuthRestController {
     AuthService authService;
 
     @PostMapping("/v1/auth/register")
-    public ResponseEntity<User> registerUser(@RequestBody RegistrationRequestVO requestVO) {
-//        User savedUser = myUserDetailsService.saveUser(requestVO);
+    public ResponseEntity<User> handleRegisterUser(@RequestBody RegistrationRequestVO requestVO) {
         User savedUser = authService.registerUser(requestVO);
         return ResponseEntity.ok(savedUser);
     }
 
     @PostMapping("/v1/auth/login")
-    public ResponseEntity<JwtResponseVO> createAuthenticationToken(@RequestBody LoginRequestVO loginRequestVO) throws Exception {
+    public ResponseEntity<JwtResponseVO> handleCreateAuthenticationToken(@RequestBody LoginRequestVO loginRequestVO) throws Exception {
 //        System.out.println("Sign in process start");
         try {
             authenticationManager.authenticate(
