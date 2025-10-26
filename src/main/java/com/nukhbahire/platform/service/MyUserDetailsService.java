@@ -1,6 +1,5 @@
 package com.nukhbahire.platform.service;
 
-import com.nukhbahire.platform.dao.UserDAO;
 import com.nukhbahire.platform.model.MyUserDetails;
 import com.nukhbahire.platform.model.User;
 import com.nukhbahire.platform.repository.UserRepository;
@@ -14,9 +13,6 @@ import java.util.Optional;
 
 @Service
 public class MyUserDetailsService implements UserDetailsService {
-
-    @Autowired
-    UserDAO userDAO;
 
     @Autowired
     UserRepository userRepository;
