@@ -29,8 +29,6 @@ public class Profile {
     private List<String> skills;
 
     private Integer experienceInMonths;
-    private List<Experience> experiences;
-    private List<Education> educations;
     private List<Certification> certifications;
 
     private LocalDate createdOn;
