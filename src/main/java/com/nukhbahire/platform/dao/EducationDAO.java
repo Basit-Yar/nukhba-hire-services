@@ -1,11 +1,11 @@
 package com.nukhbahire.platform.dao;
 
 import com.nukhbahire.platform.repository.EducationRepository;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 @Component
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class EducationDAO {
 
     private final EducationRepository educationRepository;

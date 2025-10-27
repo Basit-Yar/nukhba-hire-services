@@ -1,11 +1,11 @@
 package com.nukhbahire.platform.controller;
 
 import com.nukhbahire.platform.service.ExperienceService;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class ExperienceRestController {
 
     private final ExperienceService experienceService;

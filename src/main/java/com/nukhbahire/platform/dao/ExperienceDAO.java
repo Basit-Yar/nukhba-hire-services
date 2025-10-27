@@ -1,11 +1,11 @@
 package com.nukhbahire.platform.dao;
 
 import com.nukhbahire.platform.repository.ExperienceRepository;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 @Component
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class ExperienceDAO {
 
     private final ExperienceRepository experienceRepository;
