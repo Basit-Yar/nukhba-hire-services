@@ -11,5 +11,4 @@ public class ProfileAggregatorDAO {
     private final ExperienceDAO experienceDAO;
     private final EducationDAO educationDAO;
     private final CertificationDAO certificationDAO;
-    private final ProfileAggregatorDAO profileAggregatorDAO;
 }
