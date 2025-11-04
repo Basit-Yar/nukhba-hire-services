@@ -25,4 +25,5 @@ public class Education {
     private LocalDate endDate;
     private String grade;
     private GradeScale gradeScale;
+    private LocalDate updatedOn;
 }
