@@ -7,4 +7,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ProfileRepository extends MongoRepository<Profile, String> {
 
+    boolean existsBySlug(String slug);
 }
