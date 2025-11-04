@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
+    // TODO: 11/4/2025 : logger should not be for prod environment, keep it for dev environment.
     private static final Logger _log = LoggerFactory.getLogger(GlobalExceptionHandler.class);
 
     @ExceptionHandler(BusinessException.class)
@@ -42,6 +43,22 @@ public class GlobalExceptionHandler {
                 request.getRequestURI()
         );
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponseDTO);
+    }
+
+    // Handle NullPointerException specifically
+    @ExceptionHandler(NullPointerException.class)
+    public ResponseEntity<ErrorResponseDTO> handleNullPointerException(NullPointerException ex, HttpServletRequest request) {
+        _log.error("Unhandled exception: {}", ex.getMessage(), ex);
+
+        String message = "A required value was missing during request processing. Please contact support if the problem persists.";
+
+        ErrorResponseDTO error = new ErrorResponseDTO(
+                HttpStatus.INTERNAL_SERVER_ERROR.value(),
+                "NULL_POINTER_ERROR",
+                ex.getMessage() != null ? ex.getMessage() : message,
+                request.getRequestURI()
+        );
+        return new ResponseEntity<>(error, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     // Fallback: handle everything else
