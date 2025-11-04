@@ -28,8 +28,7 @@ public class Profile {
     private String about;
     private List<String> skills;
 
-    private Integer experienceInMonths;
-    private List<Certification> certifications;
+//    private Integer experienceInMonths;
 
     private LocalDate createdOn;
     private LocalDate updatedOn;

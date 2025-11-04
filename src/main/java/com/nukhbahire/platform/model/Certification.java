@@ -22,4 +22,5 @@ public class Certification {
     private LocalDate issueDate;
     private LocalDate expiryDate;
     private boolean doesNotExpire;
+    private LocalDate updatedOn;
 }

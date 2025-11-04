@@ -29,4 +29,5 @@ public class Experience {
     private String location;    // office city, country
     private WorkMode workMode;
     private List<String> highlights;    // Achievements or key responsibilities
+    private LocalDate updatedOn;
 }
