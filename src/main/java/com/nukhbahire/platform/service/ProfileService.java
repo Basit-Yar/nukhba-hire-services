@@ -2,7 +2,6 @@ package com.nukhbahire.platform.service;
 
 import com.nukhbahire.platform.dao.ProfileDAO;
 import com.nukhbahire.platform.dto.ProfileCreateRequestVO;
-import com.nukhbahire.platform.dto.UserDetailsVO;
 import com.nukhbahire.platform.exception.BusinessException;
 import com.nukhbahire.platform.model.Profile;
 import lombok.RequiredArgsConstructor;
@@ -36,5 +35,34 @@ public class ProfileService {
         profile.setSlug(slug);
         profile.setCreatedOn(LocalDate.now());
         return profileDAO.createProfile(profile);
+    }
+
+    public Profile updateProfile(String profileId, Profile profile) {
+        Profile existingProfile = profileDAO.getProfileById(profileId)
+                .orElseThrow(() -> new BusinessException("Profile not found with ID: " + profileId + "."));
+
+        if (profile.getSlug() != null && !profile.getSlug().equals(existingProfile.getSlug())) {
+            boolean slugAlreadyExists = profileDAO.existsBySlug(profile.getSlug());
+
+            if (slugAlreadyExists) {
+                throw new BusinessException("A profile with the slug '" + profile.getSlug() + "' already exists. Please choose a different slug.");
+            }
+            existingProfile.setSlug(profile.getSlug());
+        }
+
+        if (profile.getName() != null)
+            existingProfile.setName(profile.getName());
+        if (profile.getTitle() != null)
+            existingProfile.setTitle(profile.getTitle());
+        if (profile.getAbout() != null)
+            existingProfile.setAbout(profile.getAbout());
+        if (profile.getLocation() != null)
+            existingProfile.setLocation(profile.getLocation());
+        if (profile.getSkills() != null)
+            existingProfile.setSkills(profile.getSkills());
+
+        existingProfile.setUpdatedOn(LocalDate.now());
+
+        return profileDAO.saveProfile(existingProfile);
     }
 }

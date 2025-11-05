@@ -5,6 +5,8 @@ import com.nukhbahire.platform.repository.ProfileRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.util.Optional;
+
 @Component
 @RequiredArgsConstructor
 public class ProfileDAO {
@@ -17,5 +19,13 @@ public class ProfileDAO {
 
     public boolean existsBySlug(String slug) {
         return profileRepository.existsBySlug(slug);
+    }
+
+    public Optional<Profile> getProfileById(String profileId) {
+        return profileRepository.findById(profileId);
+    }
+
+    public Profile saveProfile(Profile existingProfile) {
+        return profileRepository.save(existingProfile);
     }
 }

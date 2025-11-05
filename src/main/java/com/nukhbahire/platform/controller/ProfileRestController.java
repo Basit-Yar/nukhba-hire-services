@@ -6,9 +6,7 @@ import com.nukhbahire.platform.security.ServiceContext;
 import com.nukhbahire.platform.service.ProfileService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -30,7 +28,14 @@ public class ProfileRestController {
         return new ResponseEntity<>(createdProfile, HttpStatus.OK);
     }
 
-    // TODO: 11/4/2025 : updateProfileById
+    @PatchMapping(path = "/v1/profiles/{id}")
+    public ResponseEntity<Profile> handleUpdateProfile(
+            @PathVariable(name = "id") String profileId,
+            @RequestBody Profile profile) {
+
+        Profile updatedProfile = profileService.updateProfile(profileId, profile);
+        return new ResponseEntity<>(updatedProfile, HttpStatus.OK);
+    }
     // TODO: 11/4/2025 : deleteProfileById
 
 }
